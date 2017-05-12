@@ -1,0 +1,1 @@
+docker run --network=shopping_nw -d --rm -v /home/ubuntu/data/db/postgres/data:/var/lib/postgresql/data -e POSTGRES_PASSWORD=4xBV#5!r$t -e PGDATA=/var/lib/postgresql/data/pgdata --name postgres postgres
