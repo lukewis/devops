@@ -20,4 +20,5 @@ apt-get update
 apt-get install -y docker-ce
 
 # Add the user to the docker group, or a permissions error may occur when calling docker commands
+groupadd docker
 usermod -a -G docker $USER
