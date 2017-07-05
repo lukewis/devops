@@ -15,4 +15,5 @@ sudo apt-get update
 sudo apt-get upgrade
 
 ./init_docker.sh
+./init_dotnet.sh
 
