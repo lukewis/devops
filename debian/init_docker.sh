@@ -1,6 +1,6 @@
 #!/bin/bash
 # Prerequisites for docker on Debian Jessie or Stretch
-apt-get install -y \
+sudo apt-get install -y \
      apt-transport-https \
      ca-certificates \
      curl \
@@ -11,14 +11,14 @@ apt-get install -y \
 curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
 
 # Add the docker repository
-add-apt-repository \
+sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/debian \
    $(lsb_release -cs) \
    stable"
 
-apt-get update
-apt-get install -y docker-ce
+sudo apt-get update
+sudo apt-get install -y docker-ce
 
 # Add the user to the docker group, or a permissions error may occur when calling docker commands
-groupadd docker
-usermod -a -G docker $USER
+sudo groupadd docker
+sudo usermod -a -G docker $USER
