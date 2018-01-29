@@ -1,0 +1,15 @@
+version: '3'
+services:
+  vsts_agent:    
+    image: microsoft/vsts-agent:ubuntu-16.04-docker-17.12.0-ce-standard # Has "standard" vsts tools, as well as docker support.  See https://hub.docker.com/r/microsoft/vsts-agent/
+    environment:
+      - VSTS_ACCOUNT=figtreesoftware
+      - VSTS_TOKEN_FILE=/var/vsts/vsts_credentials
+      - VSTS_AGENT=WIKIDOCKER
+      - VSTS_WORK=/var/vsts/work
+      - VSTS_POOL=Pittsburgh
+    volumes:
+      - ~/vsts:/var/vsts
+      - ~/.vsts/credentials:/var/vsts/vsts_credentials
+    ports:
+      - 80:80
