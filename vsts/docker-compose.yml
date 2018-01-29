@@ -11,5 +11,4 @@ services:
     volumes:
       - ~/vsts:/var/vsts
       - ~/.vsts/credentials:/var/vsts/vsts_credentials
-    ports:
-      - 80:80
+      - /var/run/docker.sock:/var/run/docker.sock
