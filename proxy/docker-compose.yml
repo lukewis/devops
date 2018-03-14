@@ -1,0 +1,54 @@
+version: '3.2'
+services:
+
+    site-a:
+        restart: always
+        image: nginx
+        networks:
+            - proxy
+            - db
+        environment:
+            - VIRTUAL_HOST=dev1.figtreesoftware.com
+            - LETSENCRYPT_HOST=dev1.figtreesoftware.com
+            - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
+    site-b:
+        restart: always
+        image: httpd
+        networks:
+            - proxy
+            - db
+        environment:
+            - VIRTUAL_HOST=dev2.figtreesoftware.com
+            - LETSENCRYPT_HOST=dev2.figtreesoftware.com
+            - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
+    proxy:
+        restart: always
+        image: jwilder/nginx-proxy
+        networks: 
+            - proxy
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - $HOME/certs:/etc/nginx/certs:ro
+            - $HOME/nginx/vhost.d:/etc/nginx/vhost.d
+            - $HOME/nginx/html:/usr/share/nginx/html
+            - /var/run/docker.sock:/tmp/docker.sock:ro
+        labels:
+            com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    proxy-ssl:
+        restart: always
+        image: jrcs/letsencrypt-nginx-proxy-companion
+        networks:
+            - proxy
+        volumes:
+            - $HOME/certs:/etc/nginx/certs:rw
+            - $HOME/nginx/vhost.d:/etc/nginx/vhost.d
+            - $HOME/nginx/html:/usr/share/nginx/html
+            - /var/run/docker.sock:/var/run/docker.sock:ro
+networks:
+    proxy:
+        external:
+            name: figtreeproxy
+    db:
+        driver: bridge
