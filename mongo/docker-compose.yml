@@ -1,0 +1,13 @@
+version: '3'
+networks:
+  default:
+    external:
+      name: db # Attach this container to the (existing) network for the database
+services:
+  mongo:    
+    image: mongo:3.6-jessie
+    restart: always
+    volumes:
+       - $HOME/mongo/data/db:/data/db
+    ports:
+      - 27017:27017
