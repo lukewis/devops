@@ -11,6 +11,7 @@ services:
             - VIRTUAL_HOST=dev1.figtreesoftware.com
             - LETSENCRYPT_HOST=dev1.figtreesoftware.com
             - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
+    
     site-b:
         restart: always
         image: httpd
@@ -21,6 +22,19 @@ services:
             - VIRTUAL_HOST=dev2.figtreesoftware.com
             - LETSENCRYPT_HOST=dev2.figtreesoftware.com
             - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
+    
+    # Database
+    mongo:    
+        image: mongo:3.6-jessie
+        restart: always
+        networks:
+            - db
+        volumes:
+            - $HOME/mongo/data/db:/data/db
+        ports:
+            - 27017:27017
+
+    # NGINX reverse proxy so that we can host multiple sites under the same domain, on the same machine!
     proxy:
         restart: always
         image: jwilder/nginx-proxy
@@ -36,6 +50,8 @@ services:
             - /var/run/docker.sock:/tmp/docker.sock:ro
         labels:
             com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
+    
+    # This container is a companion to nginx-proxy that retrieves and configures ssl certificates from Let'sEncrypt
     proxy-ssl:
         restart: always
         image: jrcs/letsencrypt-nginx-proxy-companion
