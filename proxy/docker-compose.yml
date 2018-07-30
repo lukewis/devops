@@ -23,17 +23,6 @@ services:
             - LETSENCRYPT_HOST=dev2.figtreesoftware.com
             - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
 
-    webjobs:
-        restart: always
-        image: lawisnie/default:webjobs-latest
-        networks:
-            - proxy
-            - db
-        environment:
-            - VIRTUAL_HOST=webjobs.figtreesoftware.com
-            - LETSENCRYPT_HOST=webjobs.figtreesoftware.com
-            - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
-
     # Database
     mongo:
         image: mongo:3.6-jessie
