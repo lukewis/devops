@@ -5,7 +5,7 @@
 version: "3"
 services:
   selenium-hub:
-    image: selenium/hub:3.12.0-boron
+    image: selenium/hub:3.14
     restart: always
     container_name: selenium-hub
     ports:
@@ -13,7 +13,7 @@ services:
     environment:
       - GRID_MAX_SESSION=10
   chrome:
-    image: selenium/node-chrome:3.12.0-boron
+    image: selenium/node-chrome:3.14
     restart: always
     depends_on:
       - selenium-hub
@@ -25,7 +25,7 @@ services:
       - NODE_MAX_SESSION=10
       - NODE_MAX_INSTANCES=10
   # firefox:
-  #   image: selenium/node-firefox:3.12.0-boron
+  #   image: selenium/node-firefox:3.14
   #   restart: always
   #   depends_on:
   #     - selenium-hub
@@ -34,3 +34,5 @@ services:
   #   environment:
   #     - HUB_HOST=selenium-hub
   #     - HUB_PORT=4444
+  #     - NODE_MAX_SESSION=10
+  #     - NODE_MAX_INSTANCES=10
