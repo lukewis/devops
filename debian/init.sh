@@ -15,5 +15,6 @@ sudo apt-get update
 sudo apt-get upgrade
 
 ./init_docker.sh
-./init_dotnet.sh
+# Not sure we need dotnet installed....we may want to use docker for this also
+# ./init_dotnet.sh
 

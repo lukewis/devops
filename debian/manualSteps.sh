@@ -13,4 +13,7 @@ ssh-keygen -t rsa -C "lawisnie@figtreesoftware.com"
 vi /home/lawisnie/.ssh/id_rsa.pub
 # Clone the repo
 git clone git@ssh.dev.azure.com:v3/figtreesoftware/Base/DevOps_Unix
-# Cd to any desired directory and run docker-compose up -d
+# Run the automated setup steps to install docker
+cd debian
+./init.sh
+# Note:  If using ssh, you'll need to disconnect and reconnect before docker commands will work
