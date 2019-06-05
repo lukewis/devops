@@ -10,6 +10,6 @@ services:
       - VSTS_WORK=/var/vsts/work
       - VSTS_POOL=Pittsburgh
     volumes:
-      - ~/vsts:/var/vsts
+      - /var/vsts:/var/vsts
       - ~/.vsts/credentials:/var/vsts/vsts_credentials
       - /var/run/docker.sock:/var/run/docker.sock

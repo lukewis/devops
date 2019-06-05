@@ -1,4 +1,4 @@
-# Install debian
+# Install debian (Tested with Debian 9.9)
 su -
 <enter password>
 # Sudo isn't installed by default, so we need to install it
