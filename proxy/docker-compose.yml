@@ -1,28 +1,5 @@
 version: '3.2'
 services:
-
-    site-a:
-        restart: always
-        image: nginx
-        networks:
-            - proxy
-            - db
-        environment:
-            - VIRTUAL_HOST=dev1.figtreesoftware.com
-            - LETSENCRYPT_HOST=dev1.figtreesoftware.com
-            - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
-
-    site-b:
-        restart: always
-        image: httpd
-        networks:
-            - proxy
-            - db
-        environment:
-            - VIRTUAL_HOST=dev2.figtreesoftware.com
-            - LETSENCRYPT_HOST=dev2.figtreesoftware.com
-            - LETSENCRYPT_EMAIL=admin@figtreesoftware.com
-
     # Database
     mongo:
         image: mongo:3.6-jessie
