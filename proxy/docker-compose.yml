@@ -1,16 +1,5 @@
 version: '3.2'
 services:
-    # Database
-    mongo:
-        image: mongo:3.6-jessie
-        restart: always
-        networks:
-            - db
-        volumes:
-            - $HOME/mongo/data/db:/data/db
-        ports:
-            - 27017:27017
-
     # NGINX reverse proxy so that we can host multiple sites under the same domain, on the same machine!
     proxy:
         restart: always
@@ -41,7 +30,4 @@ services:
             - /var/run/docker.sock:/var/run/docker.sock:ro
 networks:
     proxy:
-        external:
-            name: figtreeproxy
-    db:
         driver: bridge
