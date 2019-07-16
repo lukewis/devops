@@ -11,6 +11,8 @@ services:
             - "443:443"
         volumes:
             - certs:/etc/nginx/certs:ro
+            - nginxconfig:/etc/nginx/vhost.d:ro
+            - nginxhtml:/usr/share/nginx/html:ro
             - /var/run/docker.sock:/tmp/docker.sock:ro
         labels:
             com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy: "true"
@@ -23,9 +25,13 @@ services:
             - proxy
         volumes:
             - certs:/etc/nginx/certs:rw
+            - nginxconfig:/etc/nginx/vhost.d:rw
+            - nginxhtml:/usr/share/nginx/html:rw
             - /var/run/docker.sock:/var/run/docker.sock:ro
 volumes:
     certs:
+    nginxconfig:
+    nginxhtml:
 networks:
     proxy:
         driver: bridge
