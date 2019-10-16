@@ -1,0 +1,35 @@
+# To execute this docker-compose yml file use docker-compose -f <file_name> up
+# Add the "-d" flag at the end for deattached execution
+version: "3"
+services:
+  nextcloud:
+    image: nextcloud
+    restart: always
+    build: .
+    environment:
+      - NEXTCLOUD_TRUSTED_DOMAINS=figtreesoftware.com
+    ports:
+      - 44444:80
+    volumes:
+      - /Volumes/Backup2/nextcloud:/var/data/ext
+  collabora:
+    image: collabora/code
+    restart: always
+    ports:
+      - 9980:9980
+    environment:
+      - extra_params=--o:ssl.enable=false
+      # pg:
+  #     image: postgres
+  #     restart: always
+  #     ports:
+  #       - "5432:5432"
+  #     environment:
+  #       - POSTGRES_PASSWORD_FILE=~/secrets/postgres.txt
+# volumes:
+#     nextcloud:
+#       driver: local
+#       driver_opts:
+#         type: none
+#         o: bind
+#         device: /Volumes/Backup2/docker/volumes/nextcloud
