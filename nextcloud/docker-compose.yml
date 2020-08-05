@@ -6,30 +6,38 @@ services:
     image: nextcloud
     restart: always
     build: .
+    networks:
+      - frontend
+      - backend
     environment:
       - NEXTCLOUD_TRUSTED_DOMAINS=figtreesoftware.com
     ports:
       - 44444:80
     volumes:
       - /Volumes/Backup2/nextcloud:/var/data/ext
+      - /Volumes/Backup2/nextcloudconfig:/var/www/html
   collabora:
     image: collabora/code
     restart: always
+    networks:
+      - backend
     ports:
       - 9980:9980
     environment:
       - extra_params=--o:ssl.enable=false
-      # pg:
-  #     image: postgres
-  #     restart: always
-  #     ports:
-  #       - "5432:5432"
-  #     environment:
-  #       - POSTGRES_PASSWORD_FILE=~/secrets/postgres.txt
-# volumes:
-#     nextcloud:
-#       driver: local
-#       driver_opts:
-#         type: none
-#         o: bind
-#         device: /Volumes/Backup2/docker/volumes/nextcloud
+  pg:
+    image: postgres:12.0
+    restart: always
+    networks:
+      - backend
+    environment:
+      - POSTGRES_PASSWORD_FILE=/var/secrets/postgres.txt
+    volumes:
+      - $HOME/secrets/postgres.txt:/var/secrets/postgres.txt:ro
+      - $HOME/pg/nextcloud:/var/lib/postgresql/data
+
+networks:
+  frontend:
+  backend:
+    external:
+      name: db
