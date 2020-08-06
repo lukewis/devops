@@ -14,11 +14,15 @@
   "license": "ISC",
   "devDependencies": {
     "@types/inquirer": "^7.3.0",
+    "@types/node": "^12.12.53",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.7"
   },
   "dependencies": {
     "chalk": "^4.1.0",
-    "inquirer": "^7.3.3"
+    "inquirer": "^7.3.3",
+    "node-df": "^0.1.4",
+    "node-wifi": "^2.0.13",
+    "wireless-tools": "^0.19.0"
   }
 }
