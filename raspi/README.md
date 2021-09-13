@@ -2,13 +2,14 @@
 Raspbian images can be found here: http://downloads.raspberrypi.org/
 
 # Setup
-1. Flash the image to an sd card with https://www.balena.io/etcher/
-1. Remove and re-insert the sd card as etcher will automatically unmount it after flashing
+1. Flash the image to an sd card with the Raspberry Pi Imager: https://www.raspberrypi.org/software/
+1. Remove and re-insert the sd card as it will automatically unmount after imaging
 1. Enable ssh
     ```
     touch /Volumes/boot/ssh
     ```
 1. Configure the default wifi network
+Tip:  You might want to create a template of this file so you can just copy it to the card instead of editing it manually
     ```
     touch /Volumes/boot/wpa_supplicant.conf
     ```
@@ -26,7 +27,7 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
 1. Eject the sd card and boot the raspberry pi
 1. Change the hostname and PASSWORD
     ```
-    ssh pi@raspberrypi.local
+    ssh pi@raspberrypi.local # Default password is 'raspberry'
     sudo raspi-config
     ```
 1. Update the base image
