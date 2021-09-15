@@ -2,13 +2,14 @@
 Raspbian images can be found here: http://downloads.raspberrypi.org/
 
 # Setup
-1. Flash the image to an sd card with https://www.balena.io/etcher/
-1. Remove and re-insert the sd card as etcher will automatically unmount it after flashing
+1. Flash the image to an sd card with the Raspberry Pi Imager: https://www.raspberrypi.org/software/
+1. Remove and re-insert the sd card as it will automatically unmount after imaging
 1. Enable ssh
     ```
     touch /Volumes/boot/ssh
     ```
 1. Configure the default wifi network
+Tip:  You might want to create a template of this file so you can just copy it to the card instead of editing it manually
     ```
     touch /Volumes/boot/wpa_supplicant.conf
     ```
@@ -26,7 +27,7 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
 1. Eject the sd card and boot the raspberry pi
 1. Change the hostname and PASSWORD
     ```
-    ssh pi@raspberrypi.local
+    ssh pi@raspberrypi.local # Default password is 'raspberry'
     sudo raspi-config
     ```
 1. Update the base image
@@ -34,21 +35,19 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
     sudo apt-get update -y
     sudo apt-get upgrade -y
     ```
+1. (Optional) - Configure authorized_keys for password-less login
+```
+scp ~/.secrets/authorized_keys pi@<ip-address>:/home/pi/.ssh/authorized_keys
+```
 
-    # Docker
-    Installing docker is pretty simple.  Simply run
-    ```
-    curl -sSL https://get.docker.com | sh
-    ```
+1. (Optional) - Install Docker
+```
+curl -fsSL https://get.docker.com -o get-docker.sh
+chmod 755 ./get-docker.sh
+./get-docker.sh
 
-    # Docker Compose
-    Sadly, the ARM build of docker does not include compose out of the box.  Getting it is pretty simple though.  Run the following commands:
-    ```
-    # Install required packages
-    sudo apt update
-    sudo apt install -y python3-pip libffi-dev
-
-    # Install Docker Compose from pip (using Python3)
-    # This might take a while
-    sudo pip3 install docker-compose
-    ```
+# After Install
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# Log out and log back in so that your group membership is re-evaluated.
+```
