@@ -34,3 +34,21 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
     sudo apt-get update -y
     sudo apt-get upgrade -y
     ```
+
+    # Docker
+    Installing docker is pretty simple.  Simply run
+    ```
+    curl -sSL https://get.docker.com | sh
+    ```
+
+    # Docker Compose
+    Sadly, the ARM build of docker does not include compose out of the box.  Getting it is pretty simple though.  Run the following commands:
+    ```
+    # Install required packages
+    sudo apt update
+    sudo apt install -y python3-pip libffi-dev
+
+    # Install Docker Compose from pip (using Python3)
+    # This might take a while
+    sudo pip3 install docker-compose
+    ```
