@@ -49,12 +49,9 @@ Tip:  You might want to create a template of this file so you can just copy it t
 
 1. (Optional) - Install Docker
     ```
-    curl -fsSL https://get.docker.com -o get-docker.sh
-    chmod 755 ./get-docker.sh
-    ./get-docker.sh
+    curl -fsSL https://get.docker.com | sh
 
     # After Install
-    sudo groupadd docker
     sudo usermod -aG docker $USER
     # Log out and log back in so that your group membership is re-evaluated.
     ```
