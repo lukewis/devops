@@ -26,6 +26,10 @@ Tip:  You might want to create a template of this file so you can just copy it t
     ```
 1. Eject the sd card and boot the raspberry pi
 1. (Optional) Add the pi to the local dns so you can access it by name instead of ip
+1. Create the ssh directory
+    ```
+    mkdir ~/.ssh
+    ```
 1. Change the hostname and PASSWORD, then reboot
     ```
     ssh pi@raspberrypi.local # Default password is 'raspberry'
