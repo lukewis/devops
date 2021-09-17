@@ -38,7 +38,7 @@ Tip:  You might want to create a template of this file so you can just copy it t
 
 1. (Optional) - Configure authorized_keys for password-less login
     ```
-    scp ~/.secrets/authorized_keys pi@<ip-address>:/home/pi/.ssh/authorized_keys
+    scp ~/.secrets/authorized_keys pi@<ip-address>:/home/pi/.ssh/
     ```
 
 1. Update the base image
