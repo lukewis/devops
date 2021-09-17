@@ -25,19 +25,22 @@ Tip:  You might want to create a template of this file so you can just copy it t
     }
     ```
 1. Eject the sd card and boot the raspberry pi
-1. Change the hostname and PASSWORD
+1. (Optional) Add the pi to the local dns so you can access it by name instead of ip
+1. Change the hostname and PASSWORD, then reboot
     ```
     ssh pi@raspberrypi.local # Default password is 'raspberry'
     sudo raspi-config
     ```
+
+1. (Optional) - Configure authorized_keys for password-less login
+    ```
+    scp ~/.secrets/authorized_keys pi@<ip-address>:/home/pi/.ssh/authorized_keys
+    ```
+
 1. Update the base image
     ```
     sudo apt-get update -y
     sudo apt-get upgrade -y
-    ```
-1. (Optional) - Configure authorized_keys for password-less login
-    ```
-    scp ~/.secrets/authorized_keys pi@<ip-address>:/home/pi/.ssh/authorized_keys
     ```
 
 1. (Optional) - Install Docker
