@@ -1,0 +1,25 @@
+# Expose pihole on the RasPi3 ip address so it can be used for dns
+apiVersion: v1
+kind: Service
+metadata:
+  name: pihole
+  namespace: pihole
+
+spec:
+  ports:
+    - name: http
+      port: 80
+    - name: foo
+      protocol: TCP
+      port: 53
+    - name: bar
+      protocol: UDP
+      port: 53
+    - name: baz
+      protocol: UDP
+      port: 67
+  externalIPs:
+    - 192.168.4.155
+  selector:
+    app: pihole
+    task: pihole
