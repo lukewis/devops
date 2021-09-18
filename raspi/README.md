@@ -55,6 +55,13 @@ Tip:  You might want to create a template of this file so you can just copy it t
     sudo usermod -aG docker $USER
     # Log out and log back in so that your group membership is re-evaluated.
     ```
+1. (Optional) - Install docker-compose
+    ```
+    sudo apt-get install libffi-dev libssl-dev
+    sudo apt install python3-dev
+    sudo apt-get install -y python3 python3-pip
+    sudo pip3 install docker-compose
+    ```
 
 1. (Optional) - Setup K8s
     First, we'll tell docker to use systemd as the cgroup manager.  The cgroup manager is a kernel-level entity responsible for allocating cpu time.  Docker has its own by default, but by using systemd, we make sure that we're using only one cgroup manager
