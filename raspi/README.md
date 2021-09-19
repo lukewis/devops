@@ -64,6 +64,7 @@ Tip:  You might want to create a template of this file so you can just copy it t
     ```
 
 1. (Optional) - Setup K8s
+
     First, we'll tell docker to use systemd as the cgroup manager.  The cgroup manager is a kernel-level entity responsible for allocating cpu time.  Docker has its own by default, but by using systemd, we make sure that we're using only one cgroup manager
     ```
     cp daemon.json /etc/docker/
@@ -77,4 +78,20 @@ Tip:  You might want to create a template of this file so you can just copy it t
     ```
     sudo shutdown -r now
     docker info
+    ```
+    Next, install K3s
+    ```
+    curl -sfL https://get.k3s.io | sh -
+    ```
+    The kubectl config will be written to
+    ```
+    /etc/rancher/k3s/k3s.yaml
+    ```
+    Add nodes to the cluster by running
+    ```
+    curl -sfL https://get.k3s.io | K3S_URL=https://myserver:6443 K3S_TOKEN=mynodetoken sh -
+    ```
+    The node token can be found on the primary node at
+    ```
+    /var/lib/rancher/k3s/server/node-token
     ```
