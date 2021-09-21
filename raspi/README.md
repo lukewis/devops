@@ -30,15 +30,16 @@ Tip:  You might want to create a template of this file so you can just copy it t
     ```
     mkdir ~/.ssh
     ```
+
+1. (Optional) - Configure ssh
+    ```
+    scp ~/.ssh/* pi@<ip-address>:/home/pi/.ssh/
+    ```
+
 1. Change the hostname and PASSWORD, then reboot
     ```
     ssh pi@raspberrypi.local # Default password is 'raspberry'
     sudo raspi-config
-    ```
-
-1. (Optional) - Configure authorized_keys for password-less login
-    ```
-    scp ~/.secrets/authorized_keys pi@<ip-address>:/home/pi/.ssh/
     ```
 
 1. Update the base image
@@ -55,6 +56,7 @@ Tip:  You might want to create a template of this file so you can just copy it t
     sudo usermod -aG docker $USER
     # Log out and log back in so that your group membership is re-evaluated.
     ```
+
 1. (Optional) - Install docker-compose
     ```
     sudo apt-get install libffi-dev libssl-dev
