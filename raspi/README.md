@@ -1,7 +1,43 @@
 # Images
 Raspbian images can be found here: http://downloads.raspberrypi.org/
 
-# Setup
+# Quick Setup
+1. Flash the image to an sd card with the Raspberry Pi Imager: https://www.raspberrypi.org/software/
+1. Remove and re-insert the sd card as it will automatically unmount after imaging
+1. Run the initialization script (which will enable ssh and wifi)
+    ```
+    ./init.sh
+    ```
+1. Eject the sd card and boot the raspberry pi
+1. (Optional) Add the pi to the local dns so you can access it by name instead of ip
+1. Create the ssh directory
+    ```
+    mkdir ~/.ssh
+    ```
+
+1. (Optional) - Configure ssh
+    ```
+    scp ~/.ssh/* pi@<ip-address>:/home/pi/.ssh/
+    ```
+
+1. Change the hostname and PASSWORD, then reboot
+    ```
+    ssh pi@raspberrypi.local # Default password is 'raspberry'
+    sudo raspi-config
+    ```
+
+1. Update the base image
+    ```
+    sudo apt update -y
+    sudo apt upgrade -y
+    ```
+
+1. Install git
+    ```
+    sudo apt install git
+    ```
+
+# Manual Setup
 1. Flash the image to an sd card with the Raspberry Pi Imager: https://www.raspberrypi.org/software/
 1. Remove and re-insert the sd card as it will automatically unmount after imaging
 1. Enable ssh
@@ -44,8 +80,8 @@ Tip:  You might want to create a template of this file so you can just copy it t
 
 1. Update the base image
     ```
-    sudo apt-get update -y
-    sudo apt-get upgrade -y
+    sudo apt update -y
+    sudo apt upgrade -y
     ```
 
 1. (Optional) - Install Docker
