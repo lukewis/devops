@@ -41,6 +41,9 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
    ./setup.sh
    ```
 
+1, After the reboot, run setup-part2.sh
+`./DevOps_Unix/raspi/setup-part2.sh`
+
 1. Install git
    ```
    sudo apt install git
