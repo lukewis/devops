@@ -12,11 +12,13 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
    ```
 1. Eject the sd card and boot the raspberry pi
 1. (Optional) Add the pi to the local dns so you can access it by name instead of ip
-1. Create the ssh directory
-
+1. Setup ssh, change hostname and password
    ```
+   ssh pi@<ipaddress> # Default password is raspberry
    mkdir ~/.ssh
+   sudo raspi-config # Change hostname, change password
    ```
+   After making these changes, the pi will prompt you to reboot.  Do that.
 
 1. (Optional) - Configure ssh
 
@@ -24,18 +26,11 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
    scp ~/.ssh/* pi@<ip-address>:/home/pi/.ssh/
    ```
 
-1. Change the hostname and PASSWORD, then reboot
-
-   ```
-   ssh pi@raspberrypi.local # Default password is 'raspberry'
-   sudo raspi-config
-   ```
-
 1. Clone the git repo and run the setup.sh script
 
    ```
    sudo apt update -y
-   sudo apt install git
+   sudo apt install git -y
    git clone git@ssh.dev.azure.com:v3/figtreesoftware/Base/DevOps_Unix
    cd ./DevOps_Unix/raspi
    ./setup.sh
