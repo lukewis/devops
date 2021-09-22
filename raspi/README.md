@@ -164,3 +164,6 @@ Raspbian images can be found here: http://downloads.raspberrypi.org/
    ```
    /var/lib/rancher/k3s/server/node-token
    ```
+
+1. Install cert-manager for ssl certificates
+   https://opensource.com/article/20/3/ssl-letsencrypt-k3s
