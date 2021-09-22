@@ -13,7 +13,7 @@ sudo apt install -y python3 python3-pip
 sudo pip3 install docker-compose
 
 echo "Preparing to install K3S"
-cp daemon.json /etc/docker/
+sudo cp daemon.json /etc/docker/
 sudo sed -i '$ s/$/ cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1 swapaccount=1/' /boot/cmdline.txt
 echo "Setup part 1 is complete.  If there were no errors, please reboot the pi (sudo shutdown -r now) and run setup-part2.sh"
 
