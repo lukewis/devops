@@ -15,7 +15,5 @@ sudo pip3 install docker-compose
 echo "Preparing to install K3S"
 cp daemon.json /etc/docker/
 sudo sed -i '$ s/$/ cgroup_enable=cpuset cgroup_enable=memory cgroup_memory=1 swapaccount=1/' /boot/cmdline.txt
-echo "System will now reboot...Please run setup-part2.sh after reboot"
-sudo shutdown -r now
 
 # Script continues in setup-part2.sh...
