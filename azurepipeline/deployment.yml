@@ -22,6 +22,19 @@ spec:
       containers:
         - name: azure-pipelines
           image: lawisnie/azure-pipeline-agent:latest
+          env:
+            - name: AZP_URL
+              valueFrom:
+                secretKeyRef:
+                  name: azure-url
+                  key: Value
+            - name: AZP_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: azure-pat
+                  key: Value
+            - name: AZP_POOL
+              value: Pittsburgh
           resources:
             limits:
               cpu: '0.1'
