@@ -1,0 +1,28 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: azure-pipelines
+  namespace: azure-pipelines
+  labels:
+    app: azure-pipelines
+    name: azure-pipelines
+
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: azure-pipelines
+      task: azure-pipelines
+  template:
+    metadata:
+      labels:
+        app: azure-pipelines
+        task: azure-pipelines
+    spec:
+      containers:
+        - name: azure-pipelines
+          image: lawisnie/azure-pipeline-agent:latest
+          resources:
+            limits:
+              cpu: '0.1'
+              memory: 300Mi
