@@ -1,1 +1,1 @@
-docker buildx build --platform "linux/arm/v7,linux/amd64" .
+docker buildx build --tag lawisnie/azure-pipeline-agent:local --push --platform "linux/arm/v7,linux/amd64" .

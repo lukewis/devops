@@ -1,4 +1,5 @@
 FROM --platform=$BUILDPLATFORM ubuntu:18.04
+ARG BUILDPLATFORM=linux/arm/v7
 
 # To make it easier for build and release pipelines to run apt-get,
 # configure apt to not require confirmation (assume the -y argument by default)
@@ -25,9 +26,11 @@ ARG AGENT_VERSION=2.192.0
 
 WORKDIR /azp
 RUN if [ "$BUILDPLATFORM" = "linux/amd64" ]; then \
-      AZP_AGENTPACKAGE_URL=https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz; \
+      AZP_AGENTPACKAGE_URL="https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-x64-${AGENT_VERSION}.tar.gz"; \
     elif [ "$BUILDPLATFORM" = "linux/arm/v7" ]; then \
-      AZP_AGENTPACKAGE_URL=https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-arm-${AGENT_VERSION}.tar.gz; \
+      AZP_AGENTPACKAGE_URL="https://vstsagentpackage.azureedge.net/agent/${AGENT_VERSION}/vsts-agent-linux-arm-${AGENT_VERSION}.tar.gz"; \
+    else \
+      echo "Unsupported platform: $BUILDPLATFORM"; \
     fi; \
     curl -LsS "$AZP_AGENTPACKAGE_URL" | tar -xz
 
