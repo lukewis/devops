@@ -5,13 +5,12 @@ metadata:
   namespace: nginx
   annotations:
     traefik.ingress.kubernetes.io/router.entrypoints: web
-    cert-manager.io/cluster-issuer: letsencrypt-prod
 
 spec:
   tls:
     - hosts:
-        - 'figtreesoftware.com'
-      secretName: figtreesoftware-com-tls
+        - 'wikideb.home'
+      secretName: wikideb-home-tls
   rules:
     - host: figtreesoftware.com
       http:
@@ -23,7 +22,7 @@ spec:
                 name: nginx
                 port:
                   number: 80
-    - host: raspi41.home
+    - host: wikideb.home
       http:
         paths:
           - path: /
