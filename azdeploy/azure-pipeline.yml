@@ -1,3 +1,4 @@
+name: azdeploy-$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
   paths:
     include:
@@ -6,5 +7,19 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-steps:
-  - script: ./build.sh
+stages:
+- stage: Build
+  jobs:
+  - job: BuildDocker
+    steps:
+    - task: Docker@2
+      displayName: Docker Login
+      inputs:
+        containerRegistry: 'DockerHub'
+        command: 'login'
+        addPipelineData: false
+        addBaseImageData: false
+
+    - script: cd azdeploy && ./build.sh lawisnie/azdeploy $(Build.BuildId)
+      displayName: Build & Push Image
+      failOnStderr: true
