@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
         - name: azdeploy
-          image: lawisnie/azdeploy
+          image: lawisnie/azdeploy:1018
           env:
             - name: AZPAT
               valueFrom:
@@ -30,5 +30,5 @@ spec:
                   key: value
           resources:
             limits:
-              cpu: '0.1'
-              memory: 300Mi
+              cpu: '0.25'
+              memory: 1024Mi
