@@ -19,5 +19,7 @@ stages:
         command: 'login'
         addPipelineData: false
         addBaseImageData: false
+
     - script: cd azdeploy && ./build.sh lawisnie/azdeploy $(Build.BuildId)
       displayName: Build & Push Image
+      failOnStderr: true
