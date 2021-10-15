@@ -1,0 +1,10 @@
+trigger:
+  paths:
+    include:
+      - azdeploy/*
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+  - script: ./build.sh
