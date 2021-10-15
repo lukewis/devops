@@ -1,4 +1,4 @@
-name: azdeploy
+name: azdeploy-$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
   paths:
     include:
