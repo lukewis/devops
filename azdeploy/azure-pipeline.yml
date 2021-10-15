@@ -7,4 +7,4 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - script: ./build.sh
+  - script: ./build.sh lawisnie/azdeploy $(Build.BuildId)
