@@ -21,7 +21,7 @@ stages:
 - stage: Build
   jobs:
     - job: selfhostedagent
-      condition: eq('${{ parameters.agent }}', $(selfhostedagent))
+      condition: eq('${{ parameters.agent }}', '${{variables.agent}}')
       displayName: Build Docker
       pool:
         name: Pittsburgh
@@ -33,7 +33,7 @@ stages:
             name: azbuild
 
     - job: hostedagent
-      condition: ne('${{ parameters.agent }}', $(selfhostedagent))
+      condition: ne('${{ parameters.agent }}', '${{variables.agent}}')
       displayName: Build Docker
       pool:
         vmImage: 'ubuntu-latest'
