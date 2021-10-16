@@ -7,7 +7,7 @@ parameters:
 - name: agent
   displayName: Agent Pool
   type: string
-  default: ubuntu-latest
+  default: SelfHosted
   values:
     - SelfHosted
     - ubuntu-latest
