@@ -22,4 +22,4 @@ stages:
 
     - script: cd azbuild && ./build.sh lawisnie/azbuild $(Build.BuildId)
       displayName: Build & Push Image
-      failOnStderr: true
+      #failOnStderr: true
