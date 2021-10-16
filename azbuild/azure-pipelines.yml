@@ -4,8 +4,22 @@ trigger:
     include:
       - azbuild/*
 
+parameters:
+  - name: Image
+    displayName: Agent Pool
+    type: string
+    default: Pittsburgh
+    values:
+      - Pittsburgh
+      - ubuntu-latest
+      - macOS-latest
+
 pool:
-  vmImage: ubuntu-latest
+${{ if eq(parameters['Image'], 'Pittsburgh') }}:
+  name: Pittsburgh
+${{ if ne(parameters['Image'], 'Pittsburgh') }}:
+  vmImage: ${{parameters['Image']}}
+
 
 stages:
 - stage: Build
@@ -20,6 +34,6 @@ stages:
         addPipelineData: false
         addBaseImageData: false
 
-    - script: cd azbuild && ./build.sh lawisnie/azbuild $(Build.BuildId)
+    - script: cd azbuild && ./build.sh lawisnie/azbuild $(Build.BuildNumber)
       displayName: Build & Push Image
       #failOnStderr: true
