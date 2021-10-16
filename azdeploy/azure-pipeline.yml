@@ -22,4 +22,5 @@ stages:
 
     - script: cd azdeploy && ./build.sh lawisnie/azdeploy $(Build.BuildId)
       displayName: Build & Push Image
-      failOnStderr: true
+      # buildx seems to be writing informational messages to stderr :(
+      # failOnStderr: true
