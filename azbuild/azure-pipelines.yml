@@ -5,14 +5,14 @@ trigger:
       - azbuild/*
 
 parameters:
-  - name: agent
-    displayName: Agent Pool
-    type: string
-    default: Pittsburgh
-    values:
-      - Pittsburgh
-      - ubuntu-latest
-      - macOS-latest
+- name: agent
+  displayName: Agent Pool
+  type: string
+  default: Pittsburgh
+  values:
+    - Pittsburgh
+    - ubuntu-latest
+    - macOS-latest
 
 variables:
   selfhostedagent: Pittsburgh
