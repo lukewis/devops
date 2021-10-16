@@ -16,7 +16,11 @@ COPY ./setup.sh .
 RUN ./setup.sh
 # Creates a non-root user with an explicit UID and adds permission to access the /app folder
 # For more info, please refer to https://aka.ms/vscode-docker-dotnet-configure-containers
-RUN adduser -u 5678 --disabled-password --gecos "" azuser && chown -R azuser /azagent
-# The configure script canNOT be run as root
+RUN adduser -u 5678 --disabled-password --gecos "" azuser \
+    # change ownership of all files we've copied thus far
+    && chown -R azuser /azagent \
+    # grant user permission to execute docker commands
+    && usermod -aG docker azuser
+# The entrypoint script canNOT be run as root
 USER azuser
 ENTRYPOINT [ "./entrypoint.sh" ]
