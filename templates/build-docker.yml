@@ -4,14 +4,14 @@ parameters:
   type: string
 
 steps:
-    - task: Docker@2
-        displayName: Docker Login
-        inputs:
-        containerRegistry: 'DockerHub'
-        command: 'login'
-        addPipelineData: false
-        addBaseImageData: false
+- task: Docker@2
+    displayName: Docker Login
+    inputs:
+    containerRegistry: 'DockerHub'
+    command: 'login'
+    addPipelineData: false
+    addBaseImageData: false
 
-    - script: cd ${{parameters.name}} && ./build.sh lawisnie/${{parameters.name}} $(Build.BuildNumber)
-        displayName: Build & Push Image
-        #failOnStderr: true
+- script: cd ${{parameters.name}} && ./build.sh lawisnie/${{parameters.name}} $(Build.BuildNumber)
+    displayName: Build & Push Image
+    #failOnStderr: true
