@@ -14,17 +14,17 @@ parameters:
       - ubuntu-latest
       - macOS-latest
 
-pool:
-  ${{ if eq(parameters['Image'], 'Pittsburgh') }}:
-    name: Pittsburgh
-  ${{ if ne(parameters['Image'], 'Pittsburgh') }}:
-    vmImage: ${{parameters['Image']}}
-
 
 stages:
 - stage: Build
   jobs:
   - job: BuildDocker
+- ${{ if eq(parameters['Image'], 'Pittsburgh') }}:
+    pool:
+      name: Pittsburgh
+- ${{ if ne(parameters['Image'], 'Pittsburgh') }}:
+    pool:
+      vmImage: ${{parameters['Image']}}
     steps:
     - task: Docker@2
       displayName: Docker Login
