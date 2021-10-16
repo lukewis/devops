@@ -15,10 +15,10 @@ parameters:
       - macOS-latest
 
 pool:
-${{ if eq(parameters['Image'], 'Pittsburgh') }}:
-  name: Pittsburgh
-${{ if ne(parameters['Image'], 'Pittsburgh') }}:
-  vmImage: ${{parameters['Image']}}
+  ${{ if eq(parameters['Image'], 'Pittsburgh') }}:
+    name: Pittsburgh
+  ${{ if ne(parameters['Image'], 'Pittsburgh') }}:
+    vmImage: ${{parameters['Image']}}
 
 
 stages:
