@@ -2,7 +2,7 @@ version: '3.4'
 
 services:
   shoppingexpo:
-    image: lawisnie/azbuild:20211016.2
+    image: lawisnie/azbuild:20211016.3
     container_name: azbuild
     env_file:
       - ~/.secrets/azbuild.env
