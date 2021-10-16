@@ -1,4 +1,3 @@
-name: azbuild-$(Date:yyyyMMdd)$(Rev:.r)
 trigger:
   paths:
     include:
@@ -8,23 +7,23 @@ parameters:
 - name: agent
   displayName: Agent Pool
   type: string
-  default: Pittsburgh
+  default: SelfHosted
   values:
-    - Pittsburgh
+    - SelfHosted
     - ubuntu-latest
     - macOS-latest
 
 variables:
-  selfhostedagent: Pittsburgh
+  selfhostedagent: SelfHosted
 
 stages:
 - stage: Build
   jobs:
     - job: selfhostedagent
-      condition: eq('${{ parameters.agent }}', '${{variables.agent}}')
-      displayName: Build Docker
+      condition: eq('${{ parameters.agent }}', '${{variables.selfhostedagent}}')
+      displayName: SelfHosted
       pool:
-        name: Pittsburgh
+        name: ${{variables.selfhostedagent}}
         # demands:
         #   - Agent.Name -equals WS-VITOL-01
       steps:
@@ -33,8 +32,8 @@ stages:
             name: azbuild
 
     - job: hostedagent
-      condition: ne('${{ parameters.agent }}', '${{variables.agent}}')
-      displayName: Build Docker
+      condition: ne('${{ parameters.agent }}', '${{variables.selfhostedagent}}')
+      displayName: Azure Agent
       pool:
         vmImage: 'ubuntu-latest'
       steps:
