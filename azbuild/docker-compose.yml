@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  shoppingexpo:
+    image: lawisnie/azbuild
+    container_name: azbuild
+    env_file:
+      - ~/.secrets/azbuild.env
+    volumes:
+      - ~/.kube/:/home/azuser/.kube
+    restart: always
+    build:
+      context: .
+      dockerfile: ./Dockerfile

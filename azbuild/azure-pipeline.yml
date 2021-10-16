@@ -1,0 +1,25 @@
+name: azbuild-$(Date:yyyyMMdd)$(Rev:.r)
+trigger:
+  paths:
+    include:
+      - azbuild/*
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+- stage: Build
+  jobs:
+  - job: BuildDocker
+    steps:
+    - task: Docker@2
+      displayName: Docker Login
+      inputs:
+        containerRegistry: 'DockerHub'
+        command: 'login'
+        addPipelineData: false
+        addBaseImageData: false
+
+    - script: cd azbuild && ./build.sh lawisnie/azbuild $(Build.BuildId)
+      displayName: Build & Push Image
+      failOnStderr: true
