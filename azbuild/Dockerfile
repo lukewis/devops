@@ -1,9 +1,15 @@
 FROM debian:bullseye
 WORKDIR /azagent
 RUN apt update && apt install -y \
-    curl \
+    # build tools
     nano \
-    git
+    git \
+    # docker pre-reqs
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg \
+    lsb-release
 COPY ./entrypoint.sh .
 COPY ./setup.sh .
 # The setup script needs to be run as root
