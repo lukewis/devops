@@ -2,7 +2,8 @@ FROM debian:bullseye
 WORKDIR /azagent
 RUN apt update && apt install -y \
     curl \
-    nano
+    nano \
+    git
 COPY ./entrypoint.sh .
 COPY ./setup.sh .
 # The setup script needs to be run as root
