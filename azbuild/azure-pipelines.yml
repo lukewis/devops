@@ -5,7 +5,7 @@ trigger:
       - azbuild/*
 
 parameters:
-  - name: Image
+  - name: agent
     displayName: Agent Pool
     type: string
     default: Pittsburgh
@@ -14,26 +14,31 @@ parameters:
       - ubuntu-latest
       - macOS-latest
 
+variables:
+  selfhostedagent: Pittsburgh
 
 stages:
 - stage: Build
   jobs:
-  - job: BuildDocker
-    - ${{ if eq(parameters['Image'], 'Pittsburgh') }}:
+    - job: selfhostedagent
+      condition: eq(${{ parameters.agent }}, $(selfhostedagent))
+      displayName: Build Docker
       pool:
         name: Pittsburgh
-    - ${{ if ne(parameters['Image'], 'Pittsburgh') }}:
-      pool:
-        vmImage: ${{parameters['Image']}}
-    steps:
-    - task: Docker@2
-      displayName: Docker Login
-      inputs:
-        containerRegistry: 'DockerHub'
-        command: 'login'
-        addPipelineData: false
-        addBaseImageData: false
+        # demands:
+        #   - Agent.Name -equals WS-VITOL-01
+      steps:
+        - template: ../templates/build-docker.yml
+          parameters:
+            name: azbuild
 
-    - script: cd azbuild && ./build.sh lawisnie/azbuild $(Build.BuildNumber)
-      displayName: Build & Push Image
-      #failOnStderr: true
+    - job: hostedagent
+      condition: ne(${{ parameters.agent }}, $(selfhostedagent))
+      displayName: Build Docker
+      pool:
+        vmImage: 'ubuntu-latest'
+      steps:
+        - template: ../templates/build-docker.yml
+          parameters:
+            name: azbuild
+    
